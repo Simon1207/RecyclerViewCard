@@ -3,8 +3,10 @@ package com.example.simonpintado.recyclervcard;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         names=this.getAllNames();
         mRecyclerView=(RecyclerView) findViewById(R.id.my_recycler_view);
+
+        //Agrega un nuevo gridLayoutManager con un limite de 2 columnas
         mLayoutManager=new LinearLayoutManager(this);
+        mLayoutManager=new GridLayoutManager(this,2);
+        mLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+
+       // mLayoutManager=new LinearLayoutManager(this);
         mAdapter=new MyAdapter(names, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(String name, int position) {
@@ -39,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mRecyclerView.setHasFixedSize(true);
+        //mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mRecyclerView.setLayoutManager(mLayoutManager);
